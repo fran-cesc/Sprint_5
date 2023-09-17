@@ -1,5 +1,5 @@
 var JOKECONTAINER = document.querySelector(".jokeContainer");
-var API_METEO_URL = "https://api.open-meteo.com/v1/forecast?latitude=41.3888&longitude=2.159&hourly=temperature_2m,precipitation_probability,windspeed_10m&current_weather=true&timezone=auto";
+var API_METEO_URL = "https://api.open-meteo.com/v1/forecast?latitude=41.3888&longitude=2.159&current_weather=true&timezone=auto&forecast_days=1";
 var BUTTON = document.querySelector(".btn");
 var VOTEBUTTONS = document.querySelector(".buttonContainer");
 var METEOCONTAINER = document.querySelector(".meteoContainer");
@@ -14,7 +14,55 @@ window.onload = function () {
     fetch(API_METEO_URL, { headers: { 'Accept': 'application/json' } })
         .then(function (response) { return response.json(); })
         .then(function (object) {
-        METEOCONTAINER.innerHTML = "\n        Temperatura actual: ".concat(object.current_weather.temperature, " \u00BAC\n        <br>\n        Velocitat del vent: ").concat(object.current_weather.windspeed, " Km/h\n        ");
+        var weatherCode = object.current_weather.weathercode;
+        var weatherIconUrl = "";
+        console.log("El weather Code es:" + weatherCode);
+        switch (weatherCode) {
+            case (0):
+                weatherIconUrl = "./img/weather/sunny.png";
+                break;
+            case 1:
+            case 2:
+            case 3:
+                weatherIconUrl = "./img/weather/clouds_sun.png";
+                break;
+            case 45:
+            case 48:
+                weatherIconUrl = "./img/weather/foggy.png";
+                break;
+            case 51:
+            case 52:
+            case 53:
+            case 56:
+            case 57:
+                weatherIconUrl = "./img/weather/cloudy_rain_sunny.png";
+                break;
+            case 61:
+            case 63:
+            case 65:
+            case 66:
+            case 67:
+                weatherIconUrl = "./img/weather/rain.png";
+                break;
+            case 71:
+            case 73:
+            case 75:
+            case 77:
+                weatherIconUrl = "./img/weather/snow.png";
+                break;
+            case 80:
+            case 81:
+            case 82:
+            case 85:
+            case 86:
+            case 95:
+            case 96:
+            case 99:
+                weatherIconUrl = "./img/weather/storm.png";
+                break;
+        }
+        METEOCONTAINER.innerHTML =
+            "<div class=\"weatherContainer\">\n        <img src=\"".concat(weatherIconUrl, "\"> | ").concat(object.current_weather.temperature, " \u00BAC\n        </div>\n        ");
     })
         .catch(function (error) { return console.log(error); });
 };
@@ -38,6 +86,7 @@ BUTTON.addEventListener("click", function (e) {
     if (score !== 0) {
         addToArray();
     }
+    changeBackground();
     score = 0;
 });
 VOTEBUTTONS.addEventListener("click", function (e) {
@@ -47,15 +96,21 @@ VOTEBUTTONS.addEventListener("click", function (e) {
     var btn3 = document.getElementById("vote3");
     switch (jokeVoted) {
         case ("vote1"):
-            btn1.classList.add(".voted");
-            btn2.classList.remove(".voted");
-            btn3.classList.remove(".voted");
+            e.target.classList.add("voted");
+            btn2.classList.remove("voted");
+            btn3.classList.remove("voted");
             score = 1;
             break;
         case ("vote2"):
+            e.target.classList.add("voted");
+            btn1.classList.remove("voted");
+            btn3.classList.remove("voted");
             score = 2;
             break;
         case ("vote3"):
+            e.target.classList.add("voted");
+            btn2.classList.remove("voted");
+            btn1.classList.remove("voted");
             score = 3;
             break;
         default:
@@ -68,13 +123,18 @@ function printJoke() {
 }
 function showButtons() {
     VOTEBUTTONS.innerHTML =
-        "\n    <p class=\"buttonsTitle\">Rate this joke:</p>\n    <button type=\"button\" id=\"vote1\" class=\"voteBtn\"></button> \n    <button type=\"button\" id=\"vote2\" class=\"voteBtn\"></button> \n    <button type=\"button\" id=\"vote3\" class=\"voteBtn\"></button> \n    ";
+        "\n    <button type=\"button\" id=\"vote1\" class=\"voteBtn\"></button> \n    <button type=\"button\" id=\"vote2\" class=\"voteBtn\"></button> \n    <button type=\"button\" id=\"vote3\" class=\"voteBtn\"></button> \n    ";
 }
 function addToArray() {
     var date = new Date().toISOString();
     var jokeObj = new JokeObject(joke, score, date);
     reportJokes.push(jokeObj);
     console.log(reportJokes);
+}
+function changeBackground() {
+    var random = Math.floor(Math.random() * 10);
+    var body = document.getElementById("body");
+    body.className = ("body".concat(random));
 }
 // CLASS
 var JokeObject = /** @class */ (function () {

@@ -1,5 +1,5 @@
 const JOKECONTAINER = <HTMLInputElement>document.querySelector(".jokeContainer");
-const API_METEO_URL: string = "https://api.open-meteo.com/v1/forecast?latitude=41.3888&longitude=2.159&hourly=temperature_2m,precipitation_probability,windspeed_10m&current_weather=true&timezone=auto";
+const API_METEO_URL: string = "https://api.open-meteo.com/v1/forecast?latitude=41.3888&longitude=2.159&current_weather=true&timezone=auto&forecast_days=1";
 const BUTTON = <HTMLInputElement>document.querySelector(".btn");
 const VOTEBUTTONS = <HTMLInputElement>document.querySelector(".buttonContainer");
 const METEOCONTAINER = <HTMLInputElement>document.querySelector(".meteoContainer");
@@ -18,12 +18,38 @@ window.onload = () => {
     fetch(API_METEO_URL, {headers: {'Accept': 'application/json'}})
     .then((response) => response.json())
     .then((object) => {
-        METEOCONTAINER.innerHTML =`
-        Temperatura actual: ${object.current_weather.temperature} ºC
-        <br>
-        Velocitat del vent: ${object.current_weather.windspeed} Km/h
+        let weatherCode: number = object.current_weather.weathercode;
+        let weatherIconUrl: string = "";
+        console.log("El weather Code es:"+ weatherCode);
+        switch(weatherCode){
+            case(0):
+                weatherIconUrl = "./img/weather/sunny.png";
+            break;
+            case 1: case 2: case 3:
+                weatherIconUrl = "./img/weather/clouds_sun.png";
+            break;
+            case 45: case 48:
+                weatherIconUrl = "./img/weather/foggy.png";
+            break;
+            case 51: case 52: case 53: case 56: case 57:
+                weatherIconUrl = "./img/weather/cloudy_rain_sunny.png";
+            break;
+            case 61: case 63: case 65: case 66: case 67:
+                weatherIconUrl = "./img/weather/rain.png";
+            break;
+            case 71: case 73: case 75: case 77:
+                weatherIconUrl = "./img/weather/snow.png";
+            break;
+            case 80: case 81: case 82: case 85: case 86: case 95: case 96: case 99:
+                weatherIconUrl = "./img/weather/storm.png";
+            break;
+        }
+        METEOCONTAINER.innerHTML =
+        `<div class="weatherContainer">
+        <img src="${weatherIconUrl}"> | ${object.current_weather.temperature} ºC
+        </div>
         `
-        })
+    })
     .catch(error => console.log(error));
 } 
 
@@ -47,6 +73,7 @@ BUTTON.addEventListener("click", (e) => {
     if (score !== 0) {
         addToArray();
     }
+    changeBackground();
     score = 0;
 }
 );
@@ -90,7 +117,6 @@ function printJoke(){
 function showButtons(){
     VOTEBUTTONS.innerHTML = 
     `
-    <p class="buttonsTitle">Rate this joke:</p>
     <button type="button" id="vote1" class="voteBtn"></button> 
     <button type="button" id="vote2" class="voteBtn"></button> 
     <button type="button" id="vote3" class="voteBtn"></button> 
@@ -102,6 +128,12 @@ function addToArray(){
     const jokeObj = new JokeObject(joke, score, date);
     reportJokes.push(jokeObj);
     console.log(reportJokes);    
+}
+
+function changeBackground(){
+    let random = Math.floor(Math.random() * 10);
+    const body = document.getElementById("body");
+    (body as HTMLElement).className = (`body${random}`);
 }
 
 // CLASS

@@ -1,14 +1,8 @@
-body{
-    background-image: url("./img/blob1.svg");
-    background-repeat: no-repeat;
-
-}
-
-
 .title{
     text-align: center;
     margin-top: 50px;
     font-size: 3em;
+    color: rgb(222, 132, 225);
 }
 
 section {
@@ -18,7 +12,6 @@ section {
 }
 
 .jokeContainer{
-    
     text-align: center;
     margin: 20px;
     color: rgb(83, 51, 208);
@@ -36,13 +29,16 @@ section {
 }
 
 .voteBtn{
-    background-size: contain;
+    background-size: 40px 40px;
+    background-position: center;
     background-repeat: no-repeat;
+    background-color: transparent;
     width: 50px;
     height: 50px;
     border-radius: 50%;
     border: none;
     margin: 0 20px;
+
 }
 
 #vote1{
@@ -56,5 +52,92 @@ section {
 }
 
 .voted{
-    border: 3px solid red;
+    background-color: rgb(179, 239, 15);
+}
+
+.weatherContainer{
+    font-size: 1.8em;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.body0{
+    background: 
+        url(./img/blob8.svg) center / 700px no-repeat,
+        url(./img/blob2.svg) bottom left / 200px no-repeat,
+        url(./img/blob5.svg) top right / 300px no-repeat
+        ;
+}
+
+.body1{
+    background: 
+        url(./img/blob0.svg) center / 700px no-repeat,
+        url(./img/blob2.svg) bottom left / 200px no-repeat,
+        url(./img/blob2.svg) top right / 300px no-repeat
+        ;
+}
+
+.body2{
+    background: 
+        url(./img/blob2.svg) center / 700px no-repeat,
+        url(./img/blob4.svg) bottom left / 200px no-repeat,
+        url(./img/blob4.svg) top right / 300px no-repeat
+        ;
+}
+
+.body3{
+    background: 
+        url(./img/blob4.svg) center / 700px no-repeat,
+        url(./img/blob6.svg) bottom left / 200px no-repeat,
+        url(./img/blob8.svg) top right / 300px no-repeat
+        ;
+}
+
+.body4{
+    background: 
+        url(./img/blob6.svg) center / 700px no-repeat,
+        url(./img/blob9.svg) bottom left / 200px no-repeat,
+        url(./img/blob10.svg) top right / 300px no-repeat
+        ;
+}
+
+.body5{
+    background: 
+        url(./img/blob8.svg) center / 700px no-repeat,
+        url(./img/blob0.svg) bottom left / 200px no-repeat,
+        url(./img/blob2.svg) top right / 300px no-repeat
+        ;
+}
+
+.body6{
+    background: 
+        url(./img/blob10.svg) center / 700px no-repeat,
+        url(./img/blob2.svg) bottom left / 200px no-repeat,
+        url(./img/blob4.svg) top right / 300px no-repeat
+        ;
+}
+
+.body7{
+    background: 
+        url(./img/blob1.svg) center / 700px no-repeat,
+        url(./img/blob5.svg) bottom left / 200px no-repeat,
+        url(./img/blob3.svg) top right / 300px no-repeat
+        ;
+}
+
+.body8{
+    background: 
+        url(./img/blob5.svg) center / 700px no-repeat,
+        url(./img/blob7.svg) bottom left / 200px no-repeat,
+        url(./img/blob9.svg) top right / 300px no-repeat
+        ;
+}
+
+.body9{
+    background: 
+        url(./img/blob6.svg) center / 700px no-repeat,
+        url(./img/blob3.svg) bottom left / 200px no-repeat,
+        url(./img/blob0.svg) top right / 300px no-repeat
+        ;
 }
