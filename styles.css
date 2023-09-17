@@ -1,0 +1,60 @@
+body{
+    background-image: url("./img/blob1.svg");
+    background-repeat: no-repeat;
+
+}
+
+
+.title{
+    text-align: center;
+    margin-top: 50px;
+    font-size: 3em;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.jokeContainer{
+    
+    text-align: center;
+    margin: 20px;
+    color: rgb(83, 51, 208);
+    font-size: 2em;
+    height: 20vh; 
+}
+.btn{
+    height: 50px;
+    width: 200px;
+    background-color: rgb(78, 196, 238);
+    border-radius: 10px;
+    border: none;
+    color: white;
+    margin-top: 50px;
+}
+
+.voteBtn{
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    margin: 0 20px;
+}
+
+#vote1{
+    background-image: url("./img/sad.png");
+}
+#vote2{
+    background-image: url("./img/neutral.png");
+}
+#vote3{
+    background-image: url("./img/happy.png");
+}
+
+.voted{
+    border: 3px solid red;
+}
