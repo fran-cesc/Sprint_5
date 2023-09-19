@@ -94,27 +94,20 @@ VOTEBUTTONS.addEventListener("click", function (e) {
     var btn1 = document.getElementById("vote1");
     var btn2 = document.getElementById("vote2");
     var btn3 = document.getElementById("vote3");
-    switch (jokeVoted) {
-        case ("vote1"):
-            e.target.classList.add("voted");
-            btn2.classList.remove("voted");
-            btn3.classList.remove("voted");
-            score = 1;
-            break;
-        case ("vote2"):
-            e.target.classList.add("voted");
-            btn1.classList.remove("voted");
-            btn3.classList.remove("voted");
-            score = 2;
-            break;
-        case ("vote3"):
-            e.target.classList.add("voted");
-            btn2.classList.remove("voted");
-            btn1.classList.remove("voted");
-            score = 3;
-            break;
-        default:
-            score = 0;
+    btn1.classList.remove("voted");
+    btn2.classList.remove("voted");
+    btn3.classList.remove("voted");
+    if (jokeVoted === "vote1") {
+        addVotedClass(e);
+        score = 1;
+    }
+    else if (jokeVoted === "vote2") {
+        addVotedClass(e);
+        score = 2;
+    }
+    else if (jokeVoted === "vote3") {
+        addVotedClass(e);
+        score = 3;
     }
 });
 // FUNCTIONS
@@ -135,6 +128,9 @@ function changeBackground() {
     var random = Math.floor(Math.random() * 10);
     var body = document.getElementById("body");
     body.className = ("body".concat(random));
+}
+function addVotedClass(e) {
+    e.target.classList.add("voted");
 }
 // CLASS
 var JokeObject = /** @class */ (function () {

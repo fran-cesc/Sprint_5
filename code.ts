@@ -83,29 +83,21 @@ VOTEBUTTONS.addEventListener("click", (e)=>{
     const btn1 = document.getElementById("vote1");
     const btn2 = document.getElementById("vote2");
     const btn3 = document.getElementById("vote3");
-    switch(jokeVoted){
-        case ("vote1"):
-            (e.target as HTMLElement).classList.add("voted");
-            (btn2 as HTMLElement).classList.remove("voted");
-            (btn3 as HTMLElement).classList.remove("voted");
-            score = 1;
-        break;
-        case ("vote2"):
-            (e.target as HTMLElement).classList.add("voted");
-            (btn1 as HTMLElement).classList.remove("voted");
-            (btn3 as HTMLElement).classList.remove("voted");
-            score = 2;
-        break;
-        case ("vote3"):
-            (e.target as HTMLElement).classList.add("voted");
-            (btn2 as HTMLElement).classList.remove("voted");
-            (btn1 as HTMLElement).classList.remove("voted");
-            score = 3;
-        break;
-        default:
-            score = 0;
-    }
-} )
+
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => button.classList.remove("voted"));
+
+    if (jokeVoted === "vote1"){
+        addVotedClass(e);
+        score = 1;
+    } else if (jokeVoted === "vote2"){
+        addVotedClass(e);
+        score = 2;
+    } else if (jokeVoted === "vote3"){
+        addVotedClass(e);
+        score = 3;
+}
+})
 
 
 // FUNCTIONS
@@ -134,6 +126,10 @@ function changeBackground(){
     let random = Math.floor(Math.random() * 10);
     const body = document.getElementById("body");
     (body as HTMLElement).className = (`body${random}`);
+}
+
+function addVotedClass(e){
+    (e.target as HTMLElement).classList.add("voted");
 }
 
 // CLASS
