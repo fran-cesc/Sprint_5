@@ -94,9 +94,8 @@ VOTEBUTTONS.addEventListener("click", function (e) {
     var btn1 = document.getElementById("vote1");
     var btn2 = document.getElementById("vote2");
     var btn3 = document.getElementById("vote3");
-    btn1.classList.remove("voted");
-    btn2.classList.remove("voted");
-    btn3.classList.remove("voted");
+    var buttons = document.querySelectorAll(".voteBtn");
+    buttons.forEach(function (button) { return button.classList.remove("voted"); });
     if (jokeVoted === "vote1") {
         addVotedClass(e);
         score = 1;

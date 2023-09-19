@@ -84,7 +84,7 @@ VOTEBUTTONS.addEventListener("click", (e)=>{
     const btn2 = document.getElementById("vote2");
     const btn3 = document.getElementById("vote3");
 
-    const buttons = document.querySelectorAll("button");
+    const buttons = document.querySelectorAll(".voteBtn");
     buttons.forEach((button) => button.classList.remove("voted"));
 
     if (jokeVoted === "vote1"){
